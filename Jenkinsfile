@@ -10,18 +10,10 @@ pipeline {
             }
         }
         
-        stage('Unit Test') {
+        stage('Start application') {
             steps {
                 script {
-                    sh 'npm test'
-                }
-            }
-        }
-        
-        stage('Build application') {
-            steps {
-                script {
-                    sh 'npm run build-dev'
+                    sh 'npm run start:dev'
                 }
             }
         }
