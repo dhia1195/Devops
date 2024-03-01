@@ -13,7 +13,7 @@ pipeline {
         stage('Start application') {
             steps {
                 script {
-                    sh 'npm run start:dev'
+                    sh ' npm i mongoose'
                 }
             }
         }
