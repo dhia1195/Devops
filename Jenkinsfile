@@ -10,7 +10,7 @@ pipeline {
             }
         }
         
-        stage('Start application') {
+        stage('mongo install') {
             steps {
                 script {
                     sh 'npm i mongoose'
@@ -18,15 +18,12 @@ pipeline {
             }
         }
         
-        stage('SonarQube Analysis') {
+        stage('Building images (node and mongo)') {
             steps {
-                script {  
-                    def scannerHome = tool 'scanner'
-                    withSonarQubeEnv {
-                        sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=nodeapp"
-                    }
-                } 
-            }  
+                script {
+                    sh 'docker-compose build'
+                }
+            }
         }
     }
 }
