@@ -10,20 +10,23 @@ pipeline {
             }
         }
         
-        stage('Unit Test') {
+        stage('Start application') {
             steps {
                 script {
-                    sh 'npm test'
+                    sh 'npm i mongoose'
                 }
             }
         }
         
-        stage('Build application') {
+        stage('SonarQube Analysis') {
             steps {
-                script {
-                    sh 'npm run build-dev'
-                }
-            }
+                script {  
+                    def scannerHome = tool 'scanner'
+                    withSonarQubeEnv {
+                        sh "${scannerHome}/bin/sonar-scanner"
+                    }
+                } 
+            }  
         }
     }
 }
